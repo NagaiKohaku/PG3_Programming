@@ -13,23 +13,26 @@ int RecursionPay(int n) {
 	return (RecursionPay(n - 1) * 2 - 50);
 }
 
-int main() 
-{
+int main() {
 
-	//勤務時間
-	int workingHours = 9;
+	for (int i = 1; i <= 10; i++) {
 
-	printf("勤務時間 : %d 時間", workingHours);
+		printf("勤務時間 : %d 時間", i);
 
-	printf("\n");
+		printf("\n");
 
-	printf("一般的な賃金体系 : %d 円", workingHours * 1072);
+		printf("一般的な賃金体系 : %d 円", i * 1072);
 
-	printf("\n");
+		printf("\n");
 
-	printf("再帰的な賃金体系 : %d 円", RecursionPay(workingHours));
+		printf("再帰的な賃金体系 : %d 円", RecursionPay(i));
 
-	printf("\n");
+		printf("\n");
+
+		printf("--------------------------");
+
+		printf("\n");
+	}
 
 	return 0;
 }
