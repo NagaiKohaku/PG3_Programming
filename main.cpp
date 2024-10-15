@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <Windows.h>
 
+#include "functional"
+
 #include "random"
 
-typedef int (*PFunc)();
+using namespace std;
 
 //1~6の間でランダムな値を返す
 int Random() {
@@ -15,12 +17,8 @@ int Random() {
 	return static_cast<int>(dice(mt));
 }
 
-//抽選結果を表示
-void LotteryResult(PFunc pFunc, int input) {
-
-	printf("\n");
-
-	printf("勝負\n");
+//4秒間待機
+void SetTimeOut() {
 
 	//1秒待ってから「.」を出す
 	for (int i = 0; i < 3; i++) {
@@ -31,53 +29,6 @@ void LotteryResult(PFunc pFunc, int input) {
 	}
 
 	Sleep(1000);
-
-	//サイコロ(1個目)
-	int dice1 = pFunc();
-
-	//サイコロ(2個目)
-	int dice2 = pFunc();
-
-	//サイコロの和
-	int diceSum = dice1 + dice2;
-
-	//抽選結果
-	int result = diceSum % 2;
-
-	printf("出た目は (%d、%d)\n", dice1, dice2);
-
-	printf("\n");
-
-	//抽選結果の表示
-	if (result == 0) {
-
-		printf("今回の結果   : 丁(偶数)\n");
-	} else {
-
-		printf("今回の結果   : 半(奇数)\n");
-	}
-
-	//プレイヤーの予想の表示
-	if (input == 0) {
-
-		printf("あなたの予想 : 丁(偶数)\n");
-	} else {
-
-		printf("あなたの予想 : 半(奇数)\n");
-	}
-
-	printf("\n");
-
-	//勝敗の表示
-	if (result == input) {
-
-		printf("勝ち\n");
-	} else {
-
-		printf("負け\n");
-	}
-
-	printf("\n");
 }
 
 int main() {
@@ -85,8 +36,43 @@ int main() {
 	//プレイヤーの入力した値
 	int input;
 
-	//関数ポインタ
-	PFunc pFunc = Random;
+	//抽選結果
+	function<bool()> lotteryResult = [&]() {
+
+		//サイコロ(1個目)
+		int dice1 = Random();
+
+		//サイコロ(2個目)
+		int dice2 = Random();
+
+		//サイコロの和
+		int diceSum = dice1 + dice2;
+
+		//サイコロの結果
+		int result = diceSum % 2;
+
+		printf("サイコロの結果 : ");
+
+		if (result == 0) {
+
+			printf("丁(偶数)\n");
+		} else {
+
+			printf("半(奇数)\n");
+		}
+
+		printf("\n");
+
+		//抽選結果を返す
+		if (input == result) {
+
+			return true;
+		} else {
+
+			return false;
+		}
+
+		};
 
 	printf("丁半博打ゲーム\n");
 	printf("ルール : ランダムで選ばれる値が 丁(偶数) か 半(奇数) かを当てる\n\n");
@@ -101,8 +87,29 @@ int main() {
 			break;
 		}
 
-		//抽選開始
-		LotteryResult(pFunc, input);
+		//4秒間待機
+		SetTimeOut();
+
+		printf("あなたの予想 : ");
+
+		if (input == 0) {
+
+			printf("丁(偶数)\n");
+		} else {
+
+			printf("半(奇数)\n");
+		}
+
+		//抽選結果表示
+		if (lotteryResult()) {
+
+			printf("勝ち\n");
+		} else {
+
+			printf("負け\n");
+		}
+
+		printf("\n");
 	}
 
 	return 0;
