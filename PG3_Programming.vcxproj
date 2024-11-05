@@ -127,7 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cheetah.cpp" />
+    <ClCompile Include="Felidae.cpp" />
+    <ClCompile Include="Lion.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cheetah.h" />
+    <ClInclude Include="Felidae.h" />
+    <ClInclude Include="Lion.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
