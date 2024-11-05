@@ -2,7 +2,7 @@
 
 #include "IShape.h"
 
-//四角形クラス : 継承元 図形クラス
+//矩形クラス : 継承元 図形クラス
 class Rectangle : public IShape {
 
 public:

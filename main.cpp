@@ -12,7 +12,7 @@ int main() {
 	//円
 	Circle circle;
 
-	//四角形
+	//矩形
 	Rectangle rectangle;
 
 	//図形の初期化処理
@@ -31,7 +31,7 @@ int main() {
 
 	printf("\n");
 
-	printf("===四角形の面積===\n");
+	printf("===矩形の面積===\n");
 
 	rectangle.Draw();
 
